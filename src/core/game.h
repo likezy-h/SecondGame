@@ -5,12 +5,15 @@
 #include<SDL3_ttf/SDL_ttf.h>
 #include<glm/glm.hpp>
 #include<string>
+#include "asset_store.h" 
 
 class Scene;  // 前向声明
 
 class Game {
+	AssetStore* asset_store_ = nullptr;//资源管理器
 	glm::vec2 screen_size_ = glm::vec2(0); // 屏幕大小
 	bool is_running_ = true;// 游戏是否运行
+	Scene* current_scene_ = nullptr;//当前场景
 
 	SDL_Window* window_ = nullptr;// 窗口
 	SDL_Renderer* renderer_ = nullptr;// 渲染器
@@ -25,7 +28,6 @@ class Game {
 	Uint64 frame_delay_ = 0;// 帧延迟，单位ns
 	float dt_ = 0.0f; // 帧间隔
 
-	Scene* current_scene_ = nullptr; // 当前场景
 public:
 	static Game& GetInstance() {
 		static Game instance;
@@ -38,4 +40,16 @@ public:
 	void update(float dt); // 更新游戏状态
 	void render(); // 渲染游戏
 	void clean();// 清理游戏资源
+
+	//getters and setters
+	glm::vec2 getScreenSize()const { return screen_size_; }//获取屏幕大小
+	Scene* getCurrentScene()const { return current_scene_; }//获取当前场景
+<<<<<<< HEAD
+	AssetStore* getAssetStore() const { return asset_store_; } // 获取资源管理器
+=======
+>>>>>>> 46efcd656628afda1e6e1411bec28c3389950aa1
+
+	//工具函数
+	void drawGrid(const glm::vec2& top_left, const glm::vec2& botton_right, float grid_width, SDL_FColor fcolor); // 绘制网格
+	void drawBoundary(const glm::vec2& top_left, const glm::vec2& botton_right, float boundary_width, SDL_FColor fcolor); // 绘制边界
 };

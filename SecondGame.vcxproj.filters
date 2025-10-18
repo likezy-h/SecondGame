@@ -24,6 +24,24 @@
     <ClCompile Include="src\scene_main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\player.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\object_world.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\scene.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="src\core\asset_store.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\object.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+=======
+>>>>>>> 46efcd656628afda1e6e1411bec28c3389950aa1
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\game.h">
@@ -38,5 +56,26 @@
     <ClInclude Include="src\scene_main.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\player.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\actor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\object_screen.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\object_world.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="src\core\asset_store.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\defs.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+=======
+>>>>>>> 46efcd656628afda1e6e1411bec28c3389950aa1
   </ItemGroup>
 </Project>
