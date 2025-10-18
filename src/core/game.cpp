@@ -102,3 +102,11 @@ void Game::clean()
 
 
 }
+
+void Game::drawGrid(const glm::vec2& top_left, const glm::vec2& botton_right, float grid_width, SDL_FColor fcolor)
+{
+}
+
+void Game::drawBoundary(const glm::vec2& top_left, const glm::vec2& botton_right, float boundary_width, SDL_FColor fcolor)
+{
+}
