@@ -4,6 +4,8 @@
 class ObjectScreen : public Object {
 protected:
 	glm::vec2 render_position_ = glm::vec2(0, 0);// 渲染(屏幕)位置
+	virtual void init() override { type_ = ObjectType::OBJECT_SCREEN; }
+
 public:
 	//getters anf stters
 	glm::vec2 getRenderPosition() const { return render_position_; }
