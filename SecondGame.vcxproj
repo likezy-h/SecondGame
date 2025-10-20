@@ -128,31 +128,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\core\asset_store.cpp" />
     <ClCompile Include="src\core\game.cpp" />
-<<<<<<< HEAD
-    <ClCompile Include="src\core\object.cpp" />
-=======
->>>>>>> 46efcd656628afda1e6e1411bec28c3389950aa1
-    <ClCompile Include="src\core\object_world.cpp" />
-    <ClCompile Include="src\core\scene.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\player.cpp" />
     <ClCompile Include="src\scene_main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\core\actor.h" />
-<<<<<<< HEAD
-    <ClInclude Include="src\core\asset_store.h" />
-    <ClInclude Include="src\core\defs.h" />
-=======
->>>>>>> 46efcd656628afda1e6e1411bec28c3389950aa1
     <ClInclude Include="src\core\game.h" />
     <ClInclude Include="src\core\object.h" />
-    <ClInclude Include="src\core\object_screen.h" />
-    <ClInclude Include="src\core\object_world.h" />
     <ClInclude Include="src\core\scene.h" />
-    <ClInclude Include="src\player.h" />
     <ClInclude Include="src\scene_main.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
