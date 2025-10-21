@@ -20,11 +20,7 @@ Sprite* Sprite::addSpriteChild(ObjectScreen* parrent, const std::string& file_pa
 
 void Sprite::render()
 {
-    if (texture_.texture == nullptr)
-    {
-        return;
-    }
-    if (parrent_ == nullptr)
+    if (!texture_.texture||!parrent_||is_finish_)
     {
         return;
     }

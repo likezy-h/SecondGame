@@ -1,5 +1,6 @@
 #include "scene_main.h"
 #include "player.h"
+#include "enemy.h"
 
 void SceneMain::init()
 {
@@ -11,6 +12,12 @@ void SceneMain::init()
     player_->init();
     player_->setPosition(world_size_ / 2.0f);
     addChild(player_);
+
+    auto enemy = new Enemy();
+    enemy->init();
+    enemy->set_target(player_);
+    enemy->setPosition(world_size_ / 2.0f + glm::vec2(200.0f));
+    addChild(enemy);
 
 }
 
@@ -44,5 +51,3 @@ void SceneMain::renderBackground()
     game_.drawGrid(start, end, 80.0f, { 0.5, 0.5, 0.5, 1.0 });
     game_.drawBoundary(start, end, 5.0f, { 1.0, 1.0, 1.0, 1.0 });
 }
-
-

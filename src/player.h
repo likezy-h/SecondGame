@@ -1,7 +1,13 @@
 #pragma once
 #include"core/actor.h"
+#include"affiliate/sprite_anim.h"
 
 class Player :public Actor {
+private:
+    SpriteAnim* sprite_idle_ = nullptr;
+    SpriteAnim* sprite_move_ = nullptr;
+    bool is_moving_ = false;
+
 public:
 	virtual void init() override;
     virtual void handleEvents(SDL_Event& event) override;
@@ -10,6 +16,7 @@ public:
     virtual void clean() override;
 
     void keyboardControl();
-    void move(float dt);
     void syncCamera();
+    void checkState();
+    void changeState(bool is_moving);
 };

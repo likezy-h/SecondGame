@@ -33,6 +33,27 @@
     <ClCompile Include="src\core\scene.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\affiliate\sprite.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\affiliate\sprite_anim.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\asset_store.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\object.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\object_affiliate.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\enemy.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\actor.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\game.h">
@@ -57,6 +78,24 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\core\object_world.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\affiliate\sprite.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\affiliate\sprite_anim.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\asset_store.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\defs.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\object_affiliate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\enemy.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

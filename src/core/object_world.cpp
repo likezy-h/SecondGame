@@ -1,4 +1,5 @@
 #include "object_world.h"
+#include"scene.h"
 
 void ObjectWorld::update(float dt)
 {

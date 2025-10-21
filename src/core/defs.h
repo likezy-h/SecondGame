@@ -1,6 +1,6 @@
 #pragma once
 
-enum calss ObjectType
+enum class ObjectType
 {
 	NONE,
 	OBJECT_SCREEN,
