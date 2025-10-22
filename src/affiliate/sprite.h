@@ -19,7 +19,7 @@ protected:
     bool is_finish_ = false;
 
 public:
-    static Sprite* addSpriteChild(ObjectScreen* parrent, const std::string& file_path, float scale = 1.0f);
+    static Sprite* addSpriteChild(ObjectScreen* parent, const std::string& file_path, float scale = 1.0f);
 
     virtual void render() override;
 
