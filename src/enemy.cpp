@@ -1,5 +1,17 @@
 #include "enemy.h"
 #include "core/scene.h"
+#include "affiliate/collider.h"
+#include "raw/stats.h"
+
+Enemy* Enemy::addEnemyChild(Object* parent, glm::vec2 pos, Player* target)
+{
+    auto enemy = new Enemy();
+    enemy->init();
+    enemy->setPosition(pos);
+    enemy->setTarget(target);
+    if (parent) parent->addChild(enemy);
+    return enemy;
+}
 
 void Enemy::init()
 {
@@ -12,22 +24,21 @@ void Enemy::init()
     anim_die_->setLoop(false);
 
     current_anim_ = anim_normal_;
+    collider_ = Collider::addColliderChild(this, current_anim_->getSize());
+    stats_ = Stats::addStatsChild(this);
 
+    setType(ObjectType::ENEMY);
 }
 
 void Enemy::update(float dt) {
     Actor::update(dt);
-    aim_target(target_);
-    move(dt);
-    timer_ += dt;
-    if (timer_ > 1.0f && timer_ < 2.0f) {
-        changeState(State::HURT);
+    if (target_->getActive()) {
+        aim_target(target_);
+        move(dt);
+        attack();
     }
-    else if (timer_ > 2.0f) {
-        changeState(State::DIE);
-    }
+    checkState();
     remove();
-
 }
 
 
@@ -41,11 +52,16 @@ void Enemy::aim_target(Player* target)
 
 void Enemy::checkState()
 {
+    State new_state;
+    if (stats_->getHealth() <= 0) new_state = State::DIE;
+    else if (stats_->getInvincible()) new_state = State::HURT;
+    else new_state = State::NORMAL;
+
+    if (new_state != current_state_) changeState(new_state);
 }
 
 void Enemy::changeState(State new_state)
 {
-    if (new_state == current_state_) return;
     current_anim_->setActive(false);
     switch (new_state) {
     case State::NORMAL:
@@ -68,5 +84,16 @@ void Enemy::remove()
 {
     if (anim_die_->getFinish()) {
         need_remove_ = true;
+    }
+}
+
+void Enemy::attack()
+{
+    if (!collider_ || !target_ || target_->getCollider() == nullptr) return;
+    if (collider_->isColliding(target_->getCollider())) {
+        // TODO: attack
+        if (stats_ && target_->getStats()) {
+            target_->takeDamage(stats_->getDamage());
+        }
     }
 }

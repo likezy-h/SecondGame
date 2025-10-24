@@ -57,6 +57,27 @@
     <ClCompile Include="src\affiliate\collider.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\weapon_thunder.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\spawner.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\effect.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\spell.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\screen\ui_mouse.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\raw\stats.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\raw\weapon.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\game.h">
@@ -102,6 +123,27 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\affiliate\collider.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\weapon_thunder.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\spawner.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\world\effect.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\world\spell.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\screen\ui_mouse.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\raw\stats.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\raw\weapon.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

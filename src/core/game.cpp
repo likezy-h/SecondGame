@@ -1,10 +1,29 @@
-#include"game.h"
-#include"../scene_main.h"
-#include"object_screen.h"
-#include"object_screen.h"
-#include"object_world.h"
-#include "../affiliate/sprite.h"
+#include "game.h"
+#include "../scene_main.h"
+#include "object_screen.h"
+#include "object_world.h"
 #include "actor.h"
+#include "../affiliate/sprite.h"
+
+void Game::run()
+{
+    while (is_running_) {
+        auto start = SDL_GetTicksNS();
+        handleEvents();
+        update(dt_);
+        render();
+        auto end = SDL_GetTicksNS();
+        auto elapsed = end - start;
+        if (elapsed < frame_delay_) {
+            SDL_DelayNS(frame_delay_ - elapsed);
+            dt_ = frame_delay_ / 1.0e9;
+        }
+        else {
+            dt_ = elapsed / 1.0e9;
+        }
+        // SDL_Log("FPS: %f", 1.0 / dt_);
+    }
+}
 
 void Game::init(std::string title, int width, int height)
 {
@@ -37,35 +56,16 @@ void Game::init(std::string title, int width, int height)
     // 设置窗口逻辑分辨率
     SDL_SetRenderLogicalPresentation(renderer_, width, height, SDL_LOGICAL_PRESENTATION_LETTERBOX);
 
-    // 计算帧延迟（纳秒级）
+    // 计算帧延迟
     frame_delay_ = 1000000000 / FPS_;
 
     // 创建资源管理器
     asset_store_ = new AssetStore(renderer_);
 
+
     // 创建场景
     current_scene_ = new SceneMain();
     current_scene_->init();
-}
-
-void Game::run()
-{
-    while (is_running_) {
-        auto start = SDL_GetTicksNS();
-        handleEvents();
-        update(dt_);
-        render();
-        auto end = SDL_GetTicksNS();
-        auto elapsed = end - start;
-        if (elapsed < frame_delay_) {
-            SDL_DelayNS(frame_delay_ - elapsed);
-            dt_ = frame_delay_ / 1.0e9;
-        }
-        else {
-            dt_ = elapsed / 1.0e9;
-        }
-        // SDL_Log("FPS: %f", 1.0 / dt_);
-    }
 }
 
 void Game::handleEvents()
@@ -84,6 +84,7 @@ void Game::handleEvents()
 
 void Game::update(float dt)
 {
+    mouse_buttons_ = SDL_GetMouseState(&mouse_position_.x, &mouse_position_.y);
     current_scene_->update(dt);
 }
 
@@ -101,6 +102,7 @@ void Game::clean()
         current_scene_->clean();
         delete current_scene_;
     }
+
     if (asset_store_) {
         asset_store_->clean();
         delete asset_store_;
@@ -113,7 +115,6 @@ void Game::clean()
     if (window_) {
         SDL_DestroyWindow(window_);
     }
-
     // 退出Mix
     Mix_CloseAudio();
     Mix_Quit();
@@ -123,15 +124,51 @@ void Game::clean()
     SDL_Quit();
 }
 
-void Game::renderTexture(const Texture& texture, const glm::vec2& position, const glm::vec2& size)
+void Game::renderTexture(const Texture& texture, const glm::vec2& position, const glm::vec2& size, const glm::vec2& mask)
 {
+    SDL_FRect src_rect = {
+        texture.src_rect.x,
+        texture.src_rect.y + texture.src_rect.h * (1 - mask.y),
+        texture.src_rect.w * mask.x,
+        texture.src_rect.h * mask.y
+    };
     SDL_FRect dst_rect = {
+        position.x,
+        position.y + size.y * (1 - mask.y),
+        size.x * mask.x,
+        size.y * mask.y
+    };
+    SDL_RenderTextureRotated(renderer_, texture.texture, &src_rect, &dst_rect, texture.angle, nullptr, texture.is_flip ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
+}
+
+void Game::renderFillCircle(const glm::vec2& position, const glm::vec2& size, float alpha)
+{
+    auto texture = asset_store_->getImage("assets/UI/circle.png");
+    SDL_FRect dst_rect = {
+        position.x, position.y, size.x, size.y
+    };
+    SDL_SetTextureAlphaModFloat(texture, alpha);
+    SDL_RenderTexture(renderer_, texture, NULL, &dst_rect);
+}
+
+void Game::renderHBar(const glm::vec2& position, const glm::vec2& size, float percent, SDL_FColor fcolor)
+{
+    SDL_SetRenderDrawColorFloat(renderer_, fcolor.r, fcolor.g, fcolor.b, fcolor.a);
+    SDL_FRect boundary_rect = {
         position.x,
         position.y,
         size.x,
         size.y
     };
-    SDL_RenderTextureRotated(renderer_, texture.texture, &texture.src_rect, &dst_rect, texture.angle, nullptr, texture.is_flip ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
+    SDL_FRect fill_rect = {
+        position.x,
+        position.y,
+        size.x * percent,
+        size.y
+    };
+    SDL_RenderRect(renderer_, &boundary_rect);
+    SDL_RenderFillRect(renderer_, &fill_rect);
+    SDL_SetRenderDrawColorFloat(renderer_, 0, 0, 0, 1);
 }
 
 void Game::drawGrid(const glm::vec2& top_left, const glm::vec2& botton_right, float grid_width, SDL_FColor fcolor)

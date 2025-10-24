@@ -1,14 +1,22 @@
 #include "player.h"
 #include "core/scene.h"
 #include "affiliate/sprite_anim.h"
+#include "affiliate/collider.h"
+#include "raw/stats.h"
 
 void Player::init()
 {
     Actor::init();
     max_speed_ = 500.0f;
-    SpriteAnim::addSpriteAnimChild(this, "assets/sprite/ghost-idle.png", 2.0f);
+    sprite_idle_ = SpriteAnim::addSpriteAnimChild(this, "assets/sprite/ghost-idle.png", 2.0f);
     sprite_move_ = SpriteAnim::addSpriteAnimChild(this, "assets/sprite/ghost-move.png", 2.0f);
     sprite_move_->setActive(false);
+
+    collider_ = Collider::addColliderChild(this, sprite_idle_->getSize() / 2.0f);
+    stats_ = Stats::addStatsChild(this);
+    effect_ = Effect::addEffectChild(nullptr, "assets/effect/1764.png", glm::vec2(0), 2.0f);
+    weapon_thunder_ = WeaponThunder::addWeaponThunderChild(this, 2.0f, 40.0f);
+
 }
 
 void Player::handleEvents(SDL_Event& event)
@@ -24,6 +32,7 @@ void Player::update(float dt)
     checkState();
     move(dt);
     syncCamera();
+    checkIsDead();
 }
 
 void Player::render()
@@ -60,6 +69,7 @@ void Player::syncCamera()
 
 void Player::checkState()
 {
+
     if (velocity_.x < 0) {
         sprite_move_->setFlip(true);
         sprite_idle_->setFlip(true);
@@ -90,5 +100,14 @@ void Player::changeState(bool is_moving)
         sprite_move_->setActive(false);
         sprite_idle_->setCurrentFrame(sprite_move_->getCurrentFrame());
         sprite_idle_->setFrameTimer(sprite_move_->getFrameTimer());
+    }
+}
+
+void Player::checkIsDead()
+{
+    if (!stats_->getIsAlive()) {
+        game_.getCurrentScene()->safeAddChild(effect_);
+        effect_->setPosition(getPosition());
+        setActive(false);
     }
 }

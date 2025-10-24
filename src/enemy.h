@@ -19,9 +19,9 @@ private:
 
 	SpriteAnim* current_anim_ = nullptr;
 
-	float timer_ = 0.0f;
 
 public:
+	static Enemy* addEnemyChild(Object* parent, glm::vec2 pos, Player* target);
 	virtual void init();
 	virtual void update(float dt)override; // override the update function from Actor
 
@@ -29,6 +29,7 @@ public:
 
 	void checkState();
 	void changeState(State new_target);
+	void attack();
 	void remove();
 
 	//getters and setters
