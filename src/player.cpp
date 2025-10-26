@@ -3,6 +3,7 @@
 #include "affiliate/sprite_anim.h"
 #include "affiliate/collider.h"
 #include "raw/stats.h"
+#include "affiliate/text_label.h"
 
 void Player::init()
 {
@@ -15,7 +16,7 @@ void Player::init()
     collider_ = Collider::addColliderChild(this, sprite_idle_->getSize() / 2.0f);
     stats_ = Stats::addStatsChild(this);
     effect_ = Effect::addEffectChild(nullptr, "assets/effect/1764.png", glm::vec2(0), 2.0f);
-    weapon_thunder_ = WeaponThunder::addWeaponThunderChild(this, 2.0f, 40.0f);
+    weapon_thunder_ = WeaponThunder::addWeaponThunderChild(this, 0.5f, 10.0f);
 
 }
 
@@ -43,6 +44,13 @@ void Player::render()
 void Player::clean()
 {
     Actor::clean();
+}
+
+void Player::takeDamage(float damage)
+{
+    if (!stats_ || stats_->getInvincible()) return;
+    Actor::takeDamage(damage);
+    game_.playSound("assets/sound/hit-flesh-02-266309.mp3");
 }
 
 void Player::keyboardControl()

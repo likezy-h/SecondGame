@@ -78,6 +78,27 @@
     <ClCompile Include="src\raw\weapon.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\scene_title.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\screen\hud_button.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\screen\hud_skill.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\screen\hud_stats.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\screen\hud_text.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\affiliate\text_label.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\affiliate\affiliate_bar.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\game.h">
@@ -144,6 +165,27 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\raw\weapon.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scene_title.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\screen\hud_button.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\screen\hud_skill.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\screen\hud_stats.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\screen\hud_text.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\affiliate\text_label.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\affiliate\affiliate_bar.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
